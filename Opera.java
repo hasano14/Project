@@ -74,11 +74,26 @@ public class Opera
     }
     return false;
   }
+
   //Return foodID
+  //TODO: Make a unique ID and find a way to make it unique
+  //TODO: Have the unique ID be able to add one from the current foodID.
   public String writeFile(String name, String fgroup, String date, String day, String drink){
     try{
+
+      File readFile = new File(fileName);
+      Scanner fileReader = new Scanner(readFile);
+
+      while(fileReader.hasNextLine()){
+        String data = fileReader.nextLine();
+        idCounter++;
+      }
+
+      System.out.println(idCounter);
+
+      fileReader.close();
       FileWriter myInputFile = new FileWriter(fileName, true);
-      myInputFile.write("\n" + name + ";" + fgroup + ";" + date + ";" + day + ";" + drink + ";");
+      myInputFile.write(name + ";" + fgroup + ";" + date + ";" + day + ";" + drink + ";\n");
       myInputFile.close();
       return "Pass foodID";
     }catch(IOException e){
