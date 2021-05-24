@@ -28,12 +28,15 @@ public class MainFile{
           //Insert New
           if(userOptions == 1){
             String newFoodID;
-            newFoodID = operaAction.writeFile(); //Sample
+            newFoodID = operaAction.writeFile("Nasi Lemak", "Meal", "21.05.2021", "Breakfast", "Milo"); //Sample
             System.out.println("Created New FoodID: " + newFoodID + "\n");
           }
           //View
           else if(userOptions == 2){
 
+          }
+          else if(userOptions == 99){
+            break;
           }
           else{
             System.out.println("!! INVALID INPUT !!");

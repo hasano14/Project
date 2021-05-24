@@ -1,1 +1,8 @@
-FoodID;Name;FoodGroup;Date;Day;Drink;
+ID;Name;FoodType;Date;Day;Drink;
+
+Nasi Lemak;Meal;21.05.2021;Breakfast;Milo;
+Nasi Lemak;Meal;21.05.2021;Breakfast;Milo;
+Nasi Lemak;Meal;21.05.2021;Breakfast;Milo;
+Nasi Lemak;Meal;21.05.2021;Breakfast;Milo;
+Nasi Lemak;Meal;21.05.2021;Breakfast;Milo;
+Nasi Lemak;Meal;21.05.2021;Breakfast;Milo;
