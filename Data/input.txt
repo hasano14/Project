@@ -1,5 +1,4 @@
 ID;Name;FoodType;Date;Day;Drink;
-2;Nasi Lemak;Meal;21.05.2021;Breakfast;Milo;
 3;Nasi Lemak;Meal;21.05.2021;Breakfast;Milo;
 4;Nasi Lemak;Meal;21.05.2021;Breakfast;Milo;
 6;Nasi Lemak;Meal;21.05.2021;Breakfast;Milo;
@@ -8,6 +7,9 @@ ID;Name;FoodType;Date;Day;Drink;
 10;Nasi Lemak;Meal;21.05.2021;Breakfast;Milo;
 11;Nasi Lemak;Meal;21.05.2021;Breakfast;Milo;
 12;Nasi Lemak;Meal;21.05.2021;Breakfast;Milo;
-13;Nasi Lemak;Meal;21.05.2021;Breakfast;Milo;
 14;Nasi Lemak;Meal;21.05.2021;Breakfast;Milo;
 15;Nasi Lemak;Meal;21.05.2021;Breakfast;Milo;
+16;Nasi Lemak;Meal;21.05.2021;Breakfast;Milo;
+17;Nasi Lemak;Meal;21.05.2021;Breakfast;Milo;
+18;Nasi Lemak;Meal;21.05.2021;Breakfast;Milo;
+19;Nasi Lemak;Meal;21.05.2021;Breakfast;Milo;

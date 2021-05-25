@@ -76,9 +76,7 @@ public class Opera
   }
 
   //Return foodID
-  //TODO: Make a unique ID and find a way to make it unique
-  //TODO: Have the unique ID be able to add one from the current foodID.
-  public String writeFile(String name, String fgroup, String date, String day, String drink){
+  public String addFood(String name, String fgroup, String date, String day, String drink){
     try{
       File readFile = new File(fileName);
       Scanner fileReader = new Scanner(readFile);
@@ -90,7 +88,6 @@ public class Opera
       while(fileReader.hasNextLine()){
         String[] data = fileReader.nextLine().split(";");
         tempID[idCounter] = Integer.parseInt(data[0]);
-        System.out.println("Temp ID: " + tempID[idCounter]);
         idCounter++;
       }
 
@@ -102,17 +99,58 @@ public class Opera
         }
       }
 
-      System.out.println("Food ID: " + foodID);
-
       fileReader.close();
       FileWriter myInputFile = new FileWriter(fileName, true);
       myInputFile.write(foodID + ";" + name + ";" + fgroup + ";" + date + ";" + day + ";" + drink + ";\n");
       myInputFile.close();
-      return "Pass foodID";
+      return Integer.toString(foodID);
     }catch(IOException e){
       return "Fail";
     }
   }
 
   //TODO: When deleting an id, anything above it will deduct by one. For example, delete 2, so anything more than 2 will decrease by one
+  /*Ways to do this:
+    Getting the input.txt then use it to check with the id to be deleted.
+    While checking the id, paste the lines into the tempfile, if the id is found,
+    don't copy to the tempfile. After complete, delete the input file and rename the tempfile to input.txt
+  */
+  public boolean deleteFood(int foodID){
+    File readFile1 = new File(fileName); //Geting the input.txt to be checked
+    File deleteFile = new File("Data/delete.txt"); //Temporarily put the data into the delete.txt
+
+    BufferedReader reader1 = null;
+    BufferedWriter writer = null;
+
+    String strCurrentLine;
+    try{
+      reader1 = new BufferedReader(new FileReader(readFile1)); //To get the buffer reader from input.txt
+      writer = new BufferedWriter(new FileWriter(deleteFile)); //To write into the delete.txt
+
+      String headerLine = reader1.readLine();
+      writer.write(headerLine + System.getProperty("line.separator"));
+
+      while((strCurrentLine = reader1.readLine()) != null){
+        String[] data = strCurrentLine.split(";");
+        if(foodID == Integer.parseInt(data[0])) continue;
+        writer.write(strCurrentLine + System.getProperty("line.separator"));
+      }
+
+    }catch (IOException e){
+      e.printStackTrace();
+      return false;
+    }finally{
+      try{
+        if(reader1 != null)
+          reader1.close();
+          writer.close();
+          readFile1.delete();
+          deleteFile.renameTo(readFile1);
+          return true;
+      } catch (IOException ex){
+        ex.printStackTrace();
+        return false;
+      }
+    }
+  }
 }
