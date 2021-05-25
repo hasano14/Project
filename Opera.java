@@ -53,7 +53,6 @@ public class Opera
   // this
   // }
 
-
   //To open and read file
   //Returns true if file exists
   public boolean fileTest()
@@ -76,6 +75,10 @@ public class Opera
   }
 
   //Return foodID
+  /*
+    Cross checking the new foodID with the foodID there is. Using boolean to check, if check remains true,
+    goes on with the change but false, need to change the foodID to something that is unique
+  */
   public String addFood(String name, String fgroup, String date, String day, String drink){
     try{
       File readFile = new File(fileName);
@@ -83,14 +86,13 @@ public class Opera
       int idCounter = 0;
       int[] tempID = new int[10000];
       int foodID = 0;
-      String headerLine = fileReader.nextLine();
+      fileReader.nextLine();
 
       while(fileReader.hasNextLine()){
         String[] data = fileReader.nextLine().split(";");
         tempID[idCounter] = Integer.parseInt(data[0]);
         idCounter++;
       }
-
 
       foodID = idCounter + 1;
       for(int i = 0; i < tempID.length; i++){
@@ -109,12 +111,85 @@ public class Opera
     }
   }
 
-  //TODO: When deleting an id, anything above it will deduct by one. For example, delete 2, so anything more than 2 will decrease by one
-  /*Ways to do this:
-    Getting the input.txt then use it to check with the id to be deleted.
-    While checking the id, paste the lines into the tempfile, if the id is found,
-    don't copy to the tempfile. After complete, delete the input file and rename the tempfile to input.txt
+  //Update by ID
+  /*
+    To get the update by ID, get the foodID, cross check with input.txt,
+    after getting the input.txt, return the information to the main to check which one to change.
+    After updating, send both the before and after data to a method where it can basically
+    adding the new data to tempfile while the before update data gets skipped.
   */
+  public String[] updateFood(int foodID){
+    File readFile = new File(fileName);
+    String[] empty = null;
+
+    BufferedReader bReaderFile = null;
+
+    String strCurrentLine;
+    try{
+      bReaderFile = new BufferedReader(new FileReader(readFile));
+
+      bReaderFile.readLine();
+
+      while((strCurrentLine = bReaderFile.readLine()) != null){
+        String[] data = strCurrentLine.split(";");
+        if(foodID == Integer.parseInt(data[0])){
+          bReaderFile.close();
+          return data;
+        }
+      }
+      bReaderFile.close();
+    }catch (IOException e){
+      e.printStackTrace();
+    }
+
+    return empty;
+  }
+
+  //Overloading the first one after getting the data
+  //TODO: The input.txt is wrong +bug
+  public boolean updateFood(String[] foodData){
+    File readFile = new File(fileName);
+    File updateData = new File("Data/update.txt");
+    String strCurrentLine;
+
+    BufferedReader bReaderFile = null;
+    BufferedWriter bUpdateFile = null;
+
+    try{
+      bReaderFile = new BufferedReader(new FileReader(readFile));
+      bUpdateFile = new BufferedWriter(new FileWriter(updateData));
+
+      bUpdateFile.write(bReaderFile.readLine() + System.getProperty("line.separator"));//The header line
+
+      while((strCurrentLine = bReaderFile.readLine()) != null){
+        String[] data = strCurrentLine.split(";");
+        if(foodData[0] == data[0]){
+          String tempString = (foodData[0] + ";" + foodData[1] + ";" + foodData[2] + ";"+ foodData[3] + ";"+ foodData[4] + ";"+ foodData[5] + ";"+ foodData[6] + ";");
+          bUpdateFile.write(tempString + System.getProperty("line.separator"));
+          continue;
+        }
+        bUpdateFile.write(bReaderFile.readLine() + System.getProperty("line.separator"));
+      }
+      bReaderFile.close();
+      bUpdateFile.close();
+      return true;
+    }catch (IOException e){
+      e.printStackTrace();
+    }finally{
+      try{
+        bReaderFile.close();
+        bUpdateFile.close();
+        readFile.delete();
+        updateData.renameTo(readFile);
+        return true;
+      }catch(IOException ex){
+        ex.printStackTrace();
+      }
+    }
+    return false;
+  }
+
+  //Delete by ID
   public boolean deleteFood(int foodID){
     File readFile1 = new File(fileName); //Geting the input.txt to be checked
     File deleteFile = new File("Data/delete.txt"); //Temporarily put the data into the delete.txt
@@ -149,8 +224,8 @@ public class Opera
           return true;
       } catch (IOException ex){
         ex.printStackTrace();
-        return false;
       }
     }
+    return false;
   }
 }

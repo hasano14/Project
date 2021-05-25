@@ -27,15 +27,36 @@ public class MainFile{
         if(input.hasNextInt()){
           userOptions = input.nextInt();
           //Insert New
-          //TODO: Make the choices for the meal and things
           if(userOptions == 1){
             String newFoodID;
             newFoodID = operaAction.addFood("Nasi Lemak", "Meal", "21.05.2021", "Breakfast", "Milo"); //Sample
             System.out.println("Created New FoodID: " + newFoodID + "\n");
           }
+
           //View
           else if(userOptions == 2){
 
+          }
+
+          //Update
+          else if(userOptions == 3){
+            int foodID;
+
+            System.out.print("FoodID to be updated: ");
+            foodID = input.nextInt();
+            String[] dataHolder = operaAction.updateFood(foodID);
+            if(dataHolder != null){
+              System.out.println("Data Has Been Extracted: " + dataHolder[1]);
+              dataHolder[1] = "Nasi Ayam"; //Sample of change
+              boolean result = operaAction.updateFood(dataHolder); //
+              if(result == true){
+                System.out.println("Data has been updated");
+              }else
+                System.out.println("Update Has Failed");
+            }
+            else{
+              System.out.println("!! FoodID Not Found !!\n");
+            }
           }
 
           //Delete by foodID
@@ -48,9 +69,9 @@ public class MainFile{
             result = operaAction.deleteFood(foodID);
 
             if(result == true)
-              System.out.println(foodID + " was successfully deleted");
+              System.out.println(foodID + " was successfully deleted\n");
             else
-              System.out.println(foodID + " was failed to delete");
+              System.out.println(foodID + " was failed to delete\n");
           }
 
           //Exit the program
