@@ -80,24 +80,39 @@ public class Opera
   //TODO: Have the unique ID be able to add one from the current foodID.
   public String writeFile(String name, String fgroup, String date, String day, String drink){
     try{
-
       File readFile = new File(fileName);
       Scanner fileReader = new Scanner(readFile);
+      int idCounter = 0;
+      int[] tempID = new int[10000];
+      int foodID = 0;
+      String headerLine = fileReader.nextLine();
 
       while(fileReader.hasNextLine()){
-        String data = fileReader.nextLine();
+        String[] data = fileReader.nextLine().split(";");
+        tempID[idCounter] = Integer.parseInt(data[0]);
+        System.out.println("Temp ID: " + tempID[idCounter]);
         idCounter++;
       }
 
-      System.out.println(idCounter);
+
+      foodID = idCounter + 1;
+      for(int i = 0; i < tempID.length; i++){
+        if(foodID == tempID[i]){
+          foodID++;
+        }
+      }
+
+      System.out.println("Food ID: " + foodID);
 
       fileReader.close();
       FileWriter myInputFile = new FileWriter(fileName, true);
-      myInputFile.write(name + ";" + fgroup + ";" + date + ";" + day + ";" + drink + ";\n");
+      myInputFile.write(foodID + ";" + name + ";" + fgroup + ";" + date + ";" + day + ";" + drink + ";\n");
       myInputFile.close();
       return "Pass foodID";
     }catch(IOException e){
       return "Fail";
     }
   }
+
+  //TODO: When deleting an id, anything above it will deduct by one. For example, delete 2, so anything more than 2 will decrease by one
 }

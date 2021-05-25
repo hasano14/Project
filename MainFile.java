@@ -20,6 +20,7 @@ public class MainFile{
       System.out.println("3 - Update");
       System.out.println("4 - Delete");
       System.out.println("99 - Exit");
+      System.out.print("? ");
       input = new Scanner(System.in);
 
       if(fileCheck == true){
