@@ -133,6 +133,7 @@ public class Opera
       while(fileReader.hasNextLine()){
         System.out.println(fileReader.nextLine());
       }
+      fileReader.close();
     }catch(IOException e){
       e.printStackTrace();
     }
@@ -166,6 +167,7 @@ public class Opera
         fileReader.close();
         return empty;
       }
+      fileReader.close();
     }catch(IOException e){
       e.printStackTrace();
     }
