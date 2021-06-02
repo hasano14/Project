@@ -252,6 +252,42 @@ public class Opera
     return false;
   }
 
+  //Search by ID
+  public void foodIDSearch(int foodID){
+    File inputFile = new File(fileName);
+    String currentLine;
+
+    try {
+      Scanner fileReader = new Scanner(inputFile);
+
+      fileReader.nextLine();
+
+      if(fileReader.hasNextLine()){
+        while(fileReader.hasNextLine()){
+          currentLine = fileReader.nextLine();
+          String[] data = currentLine.split(";");
+          if(foodID == Integer.parseInt(data[0])){
+            System.out.println("ID: " + data[0]);
+            System.out.println("Name: " + data[1]);
+            System.out.println("Group: " + data[2]);
+            System.out.println("Date: " + data[3]);
+            System.out.println("Day: " + data[4]);
+            System.out.println("Drink: " + data[5]);
+            System.out.println();
+            fileReader.close();
+            break;
+          }
+        }
+        System.out.println("Can't find data with the foodID");
+        System.out.println();
+      }else{
+        System.out.println("Empty Field");
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
   //Search by Food Group
   public void foodGroupSearch(String foodGroup){
     File inputFile = new File(fileName);
@@ -277,6 +313,9 @@ public class Opera
           System.out.println("ID: " + data[0]);
           System.out.println("Name: " + data[1]);
           System.out.println("Group: " + data[2]);
+          System.out.println("Date: " + data[3]);
+          System.out.println("Day: " + data[4]);
+          System.out.println("Drink: " + data[5]);
           System.out.println();
         }
       }else{

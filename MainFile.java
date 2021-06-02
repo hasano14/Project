@@ -129,10 +129,11 @@ public class MainFile{
 
           //Search By ID
           else if(userOptions == 5){
-            int foodID;
+            int foodID = 0;
 
             System.out.println("FoodID To Check");
             foodID = input.nextInt();
+            operaAction.foodIDSearch(foodID);
           }
 
           else if(userOptions == 6){
