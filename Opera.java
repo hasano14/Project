@@ -167,10 +167,6 @@ public class Opera
         fileReader.close();
         return empty;
       }
-<<<<<<< HEAD
-
-=======
->>>>>>> 30a0e17ab2b347375a9fe1cf10ab2b9018853e8e
       fileReader.close();
     }catch(IOException e){
       e.printStackTrace();
@@ -275,13 +271,19 @@ public class Opera
         }
       }
 
-      for(int i = 0; i < line.size(); i++){
-        String[] data = line.get(i).split(";");
-        System.out.println("ID: " + data[0]);
-        System.out.println("Name: " + data[1]);
-        System.out.println("Group: " + data[2]);
-        System.out.println();
+      if(!line.isEmpty()){
+        for (int i = 0; i < line.size(); i++) {
+          String[] data = line.get(i).split(";");
+          System.out.println("ID: " + data[0]);
+          System.out.println("Name: " + data[1]);
+          System.out.println("Group: " + data[2]);
+          System.out.println();
+        }
+      }else{
+        System.out.println("No Food In Food Group");
       }
+        
+      
 
       fileReader.close();
     }catch(IOException e){
