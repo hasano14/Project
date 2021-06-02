@@ -47,22 +47,21 @@ import java.util.*;
 
 public class Opera
 {
-  private String fileName = "Data/input.txt";
-  private String updateFileName = "Data/update.txt";
-  // public Opera()
-  // {
-  // this
-  // }
+  private String fileName;
+  private String updateFileName;
 
+  public Opera(){
+    this.fileName = "Data/input.txt";
+    this.updateFileName = "Data/update.txt";
+  }
   //To open and read file
   //Returns true if file exists
   public boolean fileTest()
   {
     try{
       File myInputFile = new File(fileName);
-      File myOutputFile = new File(fileName);
 
-      if(myInputFile.createNewFile() == false && myOutputFile.createNewFile() == false){
+      if(myInputFile.createNewFile() == false){
         return true;
       }
       else{
@@ -133,6 +132,7 @@ public class Opera
       while(fileReader.hasNextLine()){
         System.out.println(fileReader.nextLine());
       }
+      fileReader.close();
     }catch(IOException e){
       e.printStackTrace();
     }
@@ -145,8 +145,9 @@ public class Opera
     adding the new data to tempfile while the before update data gets skipped.
   */
   public String[] updateFood(int foodID){
-    String[] empty = null;
-    String[] notFound = {"Not Found"};
+    String[] empty = null; //Making an empty array to pass when there is no items in file
+    String[] notFound = {"Not Found"}; //Return not found when item is not found in the file
+
     try{
       File inputFile = new File(fileName);
       Scanner fileReader = new Scanner(inputFile);
@@ -166,6 +167,8 @@ public class Opera
         fileReader.close();
         return empty;
       }
+
+      fileReader.close();
     }catch(IOException e){
       e.printStackTrace();
     }
@@ -248,5 +251,38 @@ public class Opera
       }
     }
     return false;
+  }
+
+  //Search by Food Group
+  public void foodGroupSearch(String foodGroup){
+    File inputFile = new File(fileName);
+    ArrayList<String> line = new ArrayList<String>();
+    String currentLine;
+    try{
+      Scanner fileReader = new Scanner(inputFile);
+
+      fileReader.nextLine();
+      if(fileReader.hasNextLine()){
+        while(fileReader.hasNextLine()){
+          currentLine = fileReader.nextLine();
+          String[] data = currentLine.split(";");
+          if(data[2].equals(foodGroup)){
+            line.add(currentLine);
+          }
+        }
+      }
+
+      for(int i = 0; i < line.size(); i++){
+        String[] data = line.get(i).split(";");
+        System.out.println("ID: " + data[0]);
+        System.out.println("Name: " + data[1]);
+        System.out.println("Group: " + data[2]);
+        System.out.println();
+      }
+
+      fileReader.close();
+    }catch(IOException e){
+      e.printStackTrace();
+    }
   }
 }

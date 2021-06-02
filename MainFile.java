@@ -1,6 +1,5 @@
 import java.util.*;
 import java.io.*;
-import java.lang.*;
 
 public class MainFile{
 
@@ -19,6 +18,8 @@ public class MainFile{
       System.out.println("|2 - View");
       System.out.println("|3 - Update");
       System.out.println("|4 - Delete");
+      System.out.println("|5 - Search By ID");
+      System.out.println("|6 - Search By Food Group");
       System.out.println("|99 - Exit");
       System.out.print("? ");
       input = new Scanner(System.in);
@@ -126,6 +127,55 @@ public class MainFile{
               System.out.println(foodID + " was failed to delete\n");
           }
 
+          //Search By ID
+          else if(userOptions == 5){
+            int foodID;
+
+            System.out.println("FoodID To Check");
+            foodID = input.nextInt();
+          }
+
+          else if(userOptions == 6){
+            int choices;
+            String groupChoices = "";
+            System.out.println("Search By Food Group");
+            System.out.println("1 - Fruits");
+            System.out.println("2 - Vegetable");
+            System.out.println("3 - Grains");
+            System.out.println("4 - Protein Foods");
+            System.out.println("5 - Dairy");
+            System.out.print("? ");
+            if(input.hasNextInt()){
+              choices = input.nextInt();
+              switch(choices){
+                case 1:
+                  groupChoices = "Fruits";
+                  break;
+                case 2:
+                  groupChoices = "Vegetable";
+                  break;
+                case 3:
+                  groupChoices = "Grains";
+                  break;
+                case 4:
+                  groupChoices = "Protein Foods";
+                  break;
+                case 5:
+                  groupChoices = "Dairy";
+                  break;
+                default:
+                  System.out.println("Invalid Input");
+                  break;
+              }
+
+              operaAction.foodGroupSearch(groupChoices);
+            }
+            else{
+              System.out.println("!! Input Invalid !!");
+            }
+            
+          }
+
           //Exit the program
           else if(userOptions == 99){
             break;
@@ -147,5 +197,8 @@ public class MainFile{
       }
     }
     System.out.println("Ending Program");
+  }
+
+  private static void foodGroupSearch(String groupChoices) {
   }
 }
