@@ -27,54 +27,7 @@ public class MainFile{
       if(fileCheck == true){
         if(input.hasNextInt()){
           userOptions = input.nextInt();
-          // switch(userOptions){
-          //   case 1:
-          //     int newFoodID;
-          //     newFoodID = operaAction.addFood("Nasi Lemak", "Meal", "21.05.2021", "Breakfast", "Milo"); //Sample
-          //     System.out.println("Created New FoodID: " + newFoodID + "\n");
-          //     break;
-          //
-          //   case 2:
-          //     System.out.println("Printing All");
-          //     operaAction.viewAll();
-          //     break;
-          //   case 3:
-          //     int foodID;
-          //
-          //     System.out.print("FoodID to be updated: ");
-          //     foodID = input.nextInt();
-          //     String[] dataHolder = operaAction.updateFood(foodID);
-          //     if(dataHolder != null && !dataHolder[0].equals("Not Found")){
-          //       System.out.println("Data Has Been Extracted: " + dataHolder[1]);
-          //       dataHolder[1] = "Nasi Ayam"; //Sample of change
-          //       boolean result = operaAction.updateFood(dataHolder); //
-          //       if(result == true){
-          //         System.out.println("Data has been updated");
-          //       }else
-          //         System.out.println("Update Has Failed");
-          //     }
-          //     else if(dataHolder[0].equals("Not Found")){
-          //       System.out.println("!! FoodID Not Found !!\n");
-          //     }
-          //     else{
-          //       System.out.println("!! ERROR !!");
-          //     }
-          //     break;
-          //
-          //   case 4:
-          //     int foodID;
-          //     boolean result;
-          //
-          //     System.out.print("FoodID to delete: ");
-          //     foodID = input.nextInt();
-          //     result = operaAction.deleteFood(foodID);
-          //
-          //     if(result == true)
-          //       System.out.println(foodID + " was successfully deleted\n");
-          //     else
-          //       System.out.println(foodID + " was failed to delete\n");
-          //     break;
-          // }
+
           //Insert New
           if(userOptions == 1){
             int newFoodID;
