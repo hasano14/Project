@@ -167,7 +167,10 @@ public class Opera
         fileReader.close();
         return empty;
       }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 30a0e17ab2b347375a9fe1cf10ab2b9018853e8e
       fileReader.close();
     }catch(IOException e){
       e.printStackTrace();
