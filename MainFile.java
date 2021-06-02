@@ -198,7 +198,4 @@ public class MainFile{
     }
     System.out.println("Ending Program");
   }
-
-  private static void foodGroupSearch(String groupChoices) {
-  }
 }
