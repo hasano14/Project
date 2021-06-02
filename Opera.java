@@ -45,52 +45,49 @@
 import java.io.*;
 import java.util.*;
 
-public class Opera
-{
+public class Opera {
   private String fileName;
   private String updateFileName;
 
-  public Opera(){
+  public Opera() {
     this.fileName = "Data/input.txt";
     this.updateFileName = "Data/update.txt";
   }
-  //To open and read file
-  //Returns true if file exists
-  public boolean fileTest()
-  {
-    try{
+
+  // To open and read file
+  // Returns true if file exists
+  public boolean fileTest() {
+    try {
       File myInputFile = new File(fileName);
 
-      if(myInputFile.createNewFile() == false){
+      if (myInputFile.createNewFile() == false) {
         return true;
-      }
-      else{
+      } else {
         System.out.println("File Created");
       }
-    }
-    catch (IOException e){
+    } catch (IOException e) {
       System.out.println("An error occurred.");
     }
     return false;
   }
 
-  //Return foodID
+  // Return foodID
   /*
-   *  The addFood method is by getting the data and putting it in the highest
-   *  maxID+1 so that it won't duplicate.
+   * The addFood method is by getting the data and putting it in the highest
+   * maxID+1 so that it won't duplicate.
    */
-  public int addFood(String name, String fgroup, String date, String day, String drink){
+  public int addFood(String name, String fgroup, String date, String day, String drink) {
     String strCurrentLine;
     String holder;
     ArrayList<Integer> tempID = new ArrayList<Integer>();
 
-    try{
+    try {
       File inputFile = new File(fileName);
       FileWriter fr = null;
-      Scanner fileReader = new Scanner (inputFile);
+      Scanner fileReader = new Scanner(inputFile);
       fileReader.nextLine();
-      if(fileReader.hasNextLine()){
-        while(fileReader.hasNextLine()){
+      if (fileReader.hasNextLine()) {
+        while (fileReader.hasNextLine()) {
           strCurrentLine = fileReader.nextLine();
           String[] data = strCurrentLine.split(";");
           int tempIntHolder = Integer.parseInt(data[0]);
@@ -99,101 +96,97 @@ public class Opera
         int maxID = Collections.max(tempID);
         maxID++;
         fileReader.close();
-        holder = (maxID + ";" + name
-                  + ";" + fgroup + ";"
-                  + date + ";" + day
-                  + ";" + drink + ";"
-                  + System.getProperty("line.separator"));
+        holder = (maxID + ";" + name + ";" + fgroup + ";" + date + ";" + day + ";" + drink + ";"
+            + System.getProperty("line.separator"));
         fr = new FileWriter(inputFile, true);
         fr.write(holder);
         fr.close();
         return maxID;
-      }
-      else{
+      } else {
         fileReader.close();
         fr = new FileWriter(inputFile, true);
-        fr.write("1;"+ name + ";" + fgroup + ";" + date + ";" + day + ";" + drink + ";" + System.getProperty("line.separator"));
+        fr.write("1;" + name + ";" + fgroup + ";" + date + ";" + day + ";" + drink + ";"
+            + System.getProperty("line.separator"));
         fr.close();
         return 1;
       }
-    }catch(IOException e){
+    } catch (IOException e) {
       e.printStackTrace();
       return 0;
     }
   }
 
-  //View All
-  public void viewAll(){
+  // View All
+  public void viewAll() {
     File file = new File(fileName);
 
-    try{
+    try {
       Scanner fileReader = new Scanner(file);
       fileReader.nextLine();
-      while(fileReader.hasNextLine()){
+      while (fileReader.hasNextLine()) {
         System.out.println(fileReader.nextLine());
       }
       fileReader.close();
-    }catch(IOException e){
+    } catch (IOException e) {
       e.printStackTrace();
     }
   }
-  //Update by ID
-  /*
-    To get the update by ID, get the foodID, cross check with input.txt,
-    after getting the input.txt, return the information to the main to check which one to change.
-    After updating, send both the before and after data to a method where it can basically
-    adding the new data to tempfile while the before update data gets skipped.
-  */
-  public String[] updateFood(int foodID){
-    String[] empty = null; //Making an empty array to pass when there is no items in file
-    String[] notFound = {"Not Found"}; //Return not found when item is not found in the file
 
-    try{
+  // Update by ID
+  /*
+   * To get the update by ID, get the foodID, cross check with input.txt, after
+   * getting the input.txt, return the information to the main to check which one
+   * to change. After updating, send both the before and after data to a method
+   * where it can basically adding the new data to tempfile while the before
+   * update data gets skipped.
+   */
+  public String[] updateFood(int foodID) {
+    String[] empty = null; // Making an empty array to pass when there is no items in file
+    String[] notFound = { "Not Found" }; // Return not found when item is not found in the file
+
+    try {
       File inputFile = new File(fileName);
       Scanner fileReader = new Scanner(inputFile);
       String strCurrentLine;
 
-      fileReader.nextLine();//Getting header
-      if(fileReader.hasNextLine()){
-        while(fileReader.hasNextLine()){
+      fileReader.nextLine(); // Getting header
+      if (fileReader.hasNextLine()) {
+        while (fileReader.hasNextLine()) {
           strCurrentLine = fileReader.nextLine();
           String[] data = strCurrentLine.split(";");
-          if(foodID == Integer.parseInt(data[0])){
+          if (foodID == Integer.parseInt(data[0])) {
             fileReader.close();
             return data;
           }
         }
-      }else{
+      } else {
         fileReader.close();
         return empty;
       }
       fileReader.close();
-    }catch(IOException e){
+    } catch (IOException e) {
       e.printStackTrace();
     }
     return notFound;
   }
 
-  //Overloading the first one after getting the data
-  public boolean updateFood(String[] foodData){
+  // Overloading the first one after getting the data
+  public boolean updateFood(String[] foodData) {
     String strCurrentLine;
-    String holder = (foodData[0] + ";" + foodData[1]
-              + ";" + foodData[2] + ";"
-              + foodData[3] + ";" + foodData[4]
-              + ";" + foodData[5] + ";"
-              + System.getProperty("line.separator"));
-    try{
+    String holder = (foodData[0] + ";" + foodData[1] + ";" + foodData[2] + ";" + foodData[3] + ";" + foodData[4] + ";"
+        + foodData[5] + ";" + System.getProperty("line.separator"));
+    try {
       File inputFile = new File(fileName);
       File updateFile = new File(updateFileName);
       FileWriter fw = new FileWriter(updateFile, true);
       Scanner fileReader = new Scanner(inputFile);
 
       fw.write(fileReader.nextLine() + System.getProperty("line.separator"));
-      if(fileReader.hasNextLine()){
-        while(fileReader.hasNextLine()){
+      if (fileReader.hasNextLine()) {
+        while (fileReader.hasNextLine()) {
           strCurrentLine = fileReader.nextLine();
           String[] data = strCurrentLine.split(";");
-          if(data[0].equals(foodData[0])){
+          if (data[0].equals(foodData[0])) {
             fw.write(holder);
             continue;
           }
@@ -206,54 +199,55 @@ public class Opera
       updateFile.renameTo(inputFile);
       return true;
 
-    }catch(IOException e){
+    } catch (IOException e) {
       e.printStackTrace();
       return false;
     }
   }
 
-  //Delete by ID
-  public boolean deleteFood(int foodID){
-    File readFile1 = new File(fileName); //Geting the input.txt to be checked
-    File deleteFile = new File("Data/delete.txt"); //Temporarily put the data into the delete.txt
+  // Delete by ID
+  public boolean deleteFood(int foodID) {
+    File readFile1 = new File(fileName); // Geting the input.txt to be checked
+    File deleteFile = new File("Data/delete.txt"); // Temporarily put the data into the delete.txt
 
     BufferedReader reader1 = null;
     BufferedWriter writer = null;
 
     String strCurrentLine;
-    try{
-      reader1 = new BufferedReader(new FileReader(readFile1)); //To get the buffer reader from input.txt
-      writer = new BufferedWriter(new FileWriter(deleteFile)); //To write into the delete.txt
+    try {
+      reader1 = new BufferedReader(new FileReader(readFile1)); // To get the buffer reader from input.txt
+      writer = new BufferedWriter(new FileWriter(deleteFile)); // To write into the delete.txt
 
       String headerLine = reader1.readLine();
       writer.write(headerLine + System.getProperty("line.separator"));
 
-      while((strCurrentLine = reader1.readLine()) != null){
+      while ((strCurrentLine = reader1.readLine()) != null) {
         String[] data = strCurrentLine.split(";");
-        if(foodID == Integer.parseInt(data[0])) continue;
+        if (foodID == Integer.parseInt(data[0]))
+          continue;
         writer.write(strCurrentLine + System.getProperty("line.separator"));
       }
 
-    }catch (IOException e){
+    } catch (IOException e) {
       e.printStackTrace();
       return false;
-    }finally{
-      try{
-        if(reader1 != null)
+    } finally {
+      try {
+        if (reader1 != null)
           reader1.close();
-          writer.close();
-          readFile1.delete();
-          deleteFile.renameTo(readFile1);
-          return true;
-      } catch (IOException ex){
+        writer.close();
+        readFile1.delete();
+        deleteFile.renameTo(readFile1);
+        return true;
+      } catch (IOException ex) {
         ex.printStackTrace();
       }
     }
     return false;
   }
 
-  //Search by ID
-  public void foodIDSearch(int foodID){
+  // Search by ID
+  public void foodIDSearch(int foodID) {
     File inputFile = new File(fileName);
     String currentLine;
 
@@ -262,11 +256,11 @@ public class Opera
 
       fileReader.nextLine();
 
-      if(fileReader.hasNextLine()){
-        while(fileReader.hasNextLine()){
+      if (fileReader.hasNextLine()) {
+        while (fileReader.hasNextLine()) {
           currentLine = fileReader.nextLine();
           String[] data = currentLine.split(";");
-          if(foodID == Integer.parseInt(data[0])){
+          if (foodID == Integer.parseInt(data[0])) {
             System.out.println("ID: " + data[0]);
             System.out.println("Name: " + data[1]);
             System.out.println("Group: " + data[2]);
@@ -280,7 +274,7 @@ public class Opera
         }
         System.out.println("Can't find data with the foodID");
         System.out.println();
-      }else{
+      } else {
         System.out.println("Empty Field");
       }
     } catch (Exception e) {
@@ -288,26 +282,26 @@ public class Opera
     }
   }
 
-  //Search by Food Group
-  public void foodGroupSearch(String foodGroup){
+  // Search by Food Group
+  public void foodGroupSearch(String foodGroup) {
     File inputFile = new File(fileName);
     ArrayList<String> line = new ArrayList<String>();
     String currentLine;
-    try{
+    try {
       Scanner fileReader = new Scanner(inputFile);
 
       fileReader.nextLine();
-      if(fileReader.hasNextLine()){
-        while(fileReader.hasNextLine()){
+      if (fileReader.hasNextLine()) {
+        while (fileReader.hasNextLine()) {
           currentLine = fileReader.nextLine();
           String[] data = currentLine.split(";");
-          if(data[2].equals(foodGroup)){
+          if (data[2].equals(foodGroup)) {
             line.add(currentLine);
           }
         }
       }
 
-      if(!line.isEmpty()){
+      if (!line.isEmpty()) {
         for (int i = 0; i < line.size(); i++) {
           String[] data = line.get(i).split(";");
           System.out.println("ID: " + data[0]);
@@ -318,14 +312,12 @@ public class Opera
           System.out.println("Drink: " + data[5]);
           System.out.println();
         }
-      }else{
+      } else {
         System.out.println("No Food In Food Group");
       }
-        
-      
 
       fileReader.close();
-    }catch(IOException e){
+    } catch (IOException e) {
       e.printStackTrace();
     }
   }
