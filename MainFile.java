@@ -83,7 +83,7 @@ public class MainFile {
 
             System.out.println("FoodID To Check");
             foodID = input.nextInt();
-            operaAction.foodIDSearch(foodID);
+            Search.foodIDSearch(foodID);
           } else if (userOptions == 6) {
             int choices;
             String groupChoices = "";
@@ -117,7 +117,7 @@ public class MainFile {
                   break;
               }
 
-              operaAction.foodGroupSearch(groupChoices);
+              Search.foodGroupSearch(groupChoices);
             } else {
               System.out.println("!! Input Invalid !!");
             }

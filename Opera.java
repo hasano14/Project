@@ -246,7 +246,7 @@ public class Opera {
     return false;
   }
 
-  // Search by ID
+  /* // Search by ID
   public void foodIDSearch(int foodID) {
     File inputFile = new File(fileName);
     String currentLine;
@@ -320,5 +320,5 @@ public class Opera {
     } catch (IOException e) {
       e.printStackTrace();
     }
-  }
+  } */
 }
