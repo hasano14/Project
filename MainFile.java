@@ -1,9 +1,15 @@
-import java.util.*;
-import java.io.*;
+import java.io.IOException;
+import java.util.InputMismatchException;
+// import java.util.Scanner;
 
 public class MainFile {
 
   public static void main(String args[]) throws IOException, InputMismatchException {
+
+    // MyFrame myFrame = new MyFrame(); // calling the frame
+    new Home(); // also works as calling frame
+
+    /*
     Scanner input = null;
     boolean fileCheck;
     int userOptions = 0;
@@ -83,7 +89,7 @@ public class MainFile {
 
             System.out.println("FoodID To Check");
             foodID = input.nextInt();
-            Search.foodIDSearch(foodID);
+            SearchFood.foodIDSearch(foodID);
           } else if (userOptions == 6) {
             int choices;
             String groupChoices = "";
@@ -117,7 +123,7 @@ public class MainFile {
                   break;
               }
 
-              Search.foodGroupSearch(groupChoices);
+              SearchFood.foodGroupSearch(groupChoices);
             } else {
               System.out.println("!! Input Invalid !!");
             }
@@ -140,6 +146,6 @@ public class MainFile {
         System.out.println("!! ERROR !!");
       }
     }
-    System.out.println("Ending Program");
+    System.out.println("Ending Program");*/
   }
 }

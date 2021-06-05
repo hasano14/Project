@@ -7,7 +7,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Search {
+public class SearchFood {
     private static String fileName = "Data/input.txt";
 
     // Search by ID
@@ -38,11 +38,11 @@ public class Search {
                         break;
                     }
                 }
-                if(!exist){
+                if (!exist) {
                     System.out.println("Can't find data with the foodID");
                     System.out.println();
                 }
-                
+
             } else {
                 System.out.println("Empty Field");
             }
