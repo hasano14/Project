@@ -29,7 +29,7 @@ public class Home extends JFrame {
         this.setResizable(false); // set resizable
         this.setBounds(300, 90, 900, 600);
         this.setIconImage(image.getImage()); // change the icon of image
-        this.setVisible(true);// show the frame
+        
 
         JPanel topPanel = new JPanel();
         topPanel.setBorder(BorderFactory.createEmptyBorder(30, 10, 50, 10));
@@ -107,6 +107,7 @@ public class Home extends JFrame {
 
         this.add(topPanel, BorderLayout.NORTH);
         this.add(middlePanel, BorderLayout.CENTER);
+        this.setVisible(true);// show the frame
 
     }
 
